@@ -1,29 +1,43 @@
-import React, {useState} from 'react';
-import ReactDOM from 'react-dom'
+import React, { useState, useEffect } from 'react';
 
 import './App.css';
-import Message from './message'
-
 
 function App() {
 
-   const [inputText, setInputText] = useState('')
+   const [inputMessage, setInputMessage] = useState('')
+   const [messagesArray, setMessagesArray] = useState([])
+
+   const onSendMessage = () => {
+      setMessagesArray( prev => [...prev, inputMessage])
+      setInputMessage('')
+   }
+
 
    return (
-      <div className = 'app wrapper'>
-         <h1 className = 'textFormat'>Changing message</h1>
-         <input 
-            value = {inputText} 
-            onChange = { e => setInputText(e.target.value) } 
-            placeholder='Type here to change message' 
-            className = 'input-area'
-         />
-         <p className = 'textFormat pText'>and here is what you wrote</p>
-         <Message textToShow = {inputText} />
+      <div className = 'main-wrapper'>
+         <div 
+            className = 'message-list'>
+            { messagesArray.map((message, i) => (
+               <div key = { i }>{ message }</div>
+            )) }
+         </div>
+         <div className = 'input-wrapper'>
+            <textarea 
+               autoFocus
+               className = 'input' 
+               value = { inputMessage } 
+               onChange = { e => setInputMessage(e.target.value) }
+               onKeyDown = { ({key}) => { 
+                  if (key === 'Enter') {
+                     onSendMessage()
+                  }
+               }}></textarea>
+            <button 
+               className = 'send-btn'
+               onClick = { onSendMessage }>Отправить</button>
+         </div>
       </div>
    )
 }
-
-ReactDOM.render(<App />, document.getElementById('root'))
 
 export default App;
