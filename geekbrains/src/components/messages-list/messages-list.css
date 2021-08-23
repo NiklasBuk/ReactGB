@@ -1,13 +1,14 @@
 .messages-wrapper {
-   height: 600px;
-   width: 500px;
+   height: 550px;
+   width: 40%;
    box-sizing: border-box;
-   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.05));
-   border-radius: 10px;
+   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+   border-radius: 10px 10px 0 0;
    color: whitesmoke;
    font-size: 12px;
    padding: 12px 15px;
    position: absolute;
+   overflow:auto;
 }
 
 .messages-list {
