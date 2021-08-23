@@ -1,21 +1,20 @@
 import './input-component.css'
-import MessagesList from '../messages-list'
 
-const InputComponent = ( props ) => {
+const InputComponent = ( { inputMessage, setInputMessage, onSendMessage } ) => {
 
    return (
       <div className = 'input-wrapper'>
-         <textarea 
+         <input 
             autoFocus
             className = 'input' 
-            value = { props.value } 
-            onChange = { e => props.onChange(e.target.value) }
-            onKeyDown = { ({key}) => { 
+            value = { inputMessage } 
+            onChange = { e => setInputMessage(e.target.value) }
+            onKeyDown = {({ key }) => { 
                if (key === 'Enter') {
                   onSendMessage()
                }
             }}>
-            </textarea>
+            </input>
          <button 
             className = 'send-btn'
             onClick = { onSendMessage }>
@@ -23,7 +22,6 @@ const InputComponent = ( props ) => {
          </button>
       </div>
    )
-
 }
 
 export default InputComponent
