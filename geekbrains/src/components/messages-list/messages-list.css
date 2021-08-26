@@ -9,6 +9,7 @@
    padding: 12px 15px;
    position: absolute;
    overflow:auto;
+   scroll-behavior: smooth;
 }
 
 .messages-list {
