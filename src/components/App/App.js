@@ -1,26 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import MessagesList from '../messages-list'
 import InputComponent from '../input-component'
+import { makeStyles } from '@material-ui/core'
 
-import './App.css';
+
+
+const useStyles = makeStyles(() => ({
+   mainWrapper: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      margin: '2% 0',
+   }
+}))
 
 const App = () => {
 
    const [inputMessage, setInputMessage] = useState('')
    const [messagesArray, setMessagesArray] = useState([])
-   const [maxId, idInc] = useState(100)
+   let [id, idInc] = useState(100)
 
-   console.log(`id: ${maxId}`)
+   const chatArr = [
+      {
+         photo: 'img1',
+         name: 'name1',
+         identifier: 1,
+      }
+   ]
 
    const onSendMessage = () => {
-      const noSpaceText = inputMessage.trim()
+      const trimmedMessageText = inputMessage.trim()
 
-      const id = idInc(() => maxId + 1)
+      if (trimmedMessageText !== '') {
 
-      if (noSpaceText !== '') {
          setMessagesArray((prev) => [...prev,
          {
-            messageText: noSpaceText,
+            messageText: trimmedMessageText,
             authorName: 'Вы',
             key: id,
          },])
@@ -29,7 +44,7 @@ const App = () => {
          setTimeout(() => {
             setMessagesArray((prev) => [...prev,
                {
-                  messageText: noSpaceText,
+                  messageText: trimmedMessageText,
                   authorName: 'ChatBot',
                   key: id,
                },])
@@ -37,18 +52,21 @@ const App = () => {
       }
       console.log(messagesArray)
    }
+
    useEffect(() => {
-      document.querySelector('.messages-wrapper').scrollTop = 9999;
+      document.querySelector('.makeStyles-messagesWrapper-2').scrollTop = 9999;
    });
 
+   const classes = useStyles()
 
    return (
-
-      <div className = 'main-wrapper'>
+      <div className = {classes.mainWrapper}>
          <MessagesList 
             messagesArray = { messagesArray }
             botMessagesArray = { messagesArray }
-            key = { idInc } />
+            id = { idInc }
+            key = { id }
+            />
          <InputComponent 
             inputMessage = { inputMessage } 
             setInputMessage = { setInputMessage } 
