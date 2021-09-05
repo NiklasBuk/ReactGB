@@ -5,9 +5,9 @@ import {makeStyles} from '@material-ui/core'
 
 const useStyles = makeStyles(() => ({
    inputWrapper: {
-      width: '40%',
+      width: '35vw',
       display: 'flex',
-      justifyContent: 'center',
+      justifyContent: 'space-between',
    },
    input: {
       outline: 'none',
@@ -23,6 +23,8 @@ const useStyles = makeStyles(() => ({
    }
 }))
 
+
+
 const InputComponent = ( { inputMessage, setInputMessage, onSendMessage } ) => {
 
    const classes = useStyles()
@@ -36,18 +38,20 @@ const InputComponent = ( { inputMessage, setInputMessage, onSendMessage } ) => {
             className = {classes.input} 
             value = { inputMessage } 
             onChange = { e => setInputMessage(e.target.value) }
-            onKeyDown = {({ key }) => { 
-               if (key === 'Enter') {
-                  
+            onKeyDown = {(e) => { 
+               if (!e.shiftKey && e.key === 'Enter') {
+                  e.preventDefault()
                   onSendMessage()
                }
-            }}>
+            }}
+         >
             </TextField>
          <Button 
             variant="contained" 
             color="primary"
             className = {classes.button}
-            onClick = { onSendMessage }>
+            onClick = { onSendMessage }
+         >
                Отправить
          </Button>
       </div>

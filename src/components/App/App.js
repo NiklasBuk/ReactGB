@@ -1,31 +1,53 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 import MessagesList from '../messages-list'
 import InputComponent from '../input-component'
+import ChatList from '../chat-list'
 import { makeStyles } from '@material-ui/core'
+import avatar1 from './avatar1.png'
+import avatar2 from './avatar2.png'
+import avatar3 from './avatar3.png'
 
 
 
 const useStyles = makeStyles(() => ({
-   mainWrapper: {
+   appWrapper: {
+      height: '100vh',
+      width: '95vw',
       display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      margin: '2% 0',
-   }
+      justifyContent: 'center',
+      alignItems: 'center'
+   },
+   contentWrapper: {
+      display: 'flex',
+   },
 }))
+
+
 
 const App = () => {
 
    const [inputMessage, setInputMessage] = useState('')
    const [messagesArray, setMessagesArray] = useState([])
-   let [id, idInc] = useState(100)
 
    const chatArr = [
       {
-         photo: 'img1',
-         name: 'name1',
-         identifier: 1,
-      }
+         photo: avatar1,
+         chatName: 'Hot news',
+         personName: 'Darth W.',
+         lastMessage: 'Luke, i am your father',
+      },
+      {
+         photo: avatar2,
+         chatName: 'Wrong door',
+         personName: 'Boss of this gym',
+         lastMessage: 'Come on, let\'s go!',
+      },
+      {
+         photo: avatar3,
+         chatName: 'Soon',
+         personName: 'Arnold',
+         lastMessage: 'I\'ll be back',
+      },
    ]
 
    const onSendMessage = () => {
@@ -37,7 +59,6 @@ const App = () => {
          {
             messageText: trimmedMessageText,
             authorName: 'Вы',
-            key: id,
          },])
          setInputMessage('')
 
@@ -46,33 +67,34 @@ const App = () => {
                {
                   messageText: trimmedMessageText,
                   authorName: 'ChatBot',
-                  key: id,
                },])
          }, (Math.random()*(2000 - 500) + 500))
       }
       console.log(messagesArray)
    }
 
-   useEffect(() => {
-      document.querySelector('.makeStyles-messagesWrapper-2').scrollTop = 9999;
-   });
+   // useEffect(() => {
+   //    document.querySelector('.messagesWrapper').scrollTop = 9999
+   // })
 
    const classes = useStyles()
 
    return (
-      <div className = {classes.mainWrapper}>
-         <MessagesList 
-            messagesArray = { messagesArray }
-            botMessagesArray = { messagesArray }
-            id = { idInc }
-            key = { id }
-            />
-         <InputComponent 
-            inputMessage = { inputMessage } 
-            setInputMessage = { setInputMessage } 
-            onSendMessage = { onSendMessage } />
+      <div className = {classes.appWrapper}>
+         <div className = {classes.contentWrapper}>
+            <ChatList chatArr = {chatArr} />
+            <div>
+               <MessagesList 
+                  messagesArray = { messagesArray }
+                  />
+               <InputComponent 
+                  inputMessage = { inputMessage } 
+                  setInputMessage = { setInputMessage } 
+                  onSendMessage = { onSendMessage } />
+            </div>
+         </div>
       </div>
    )
 }
 
-export default App;
+export default App
