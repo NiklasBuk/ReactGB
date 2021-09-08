@@ -20,6 +20,10 @@ const useStyles = makeStyles(() => ({
    button: {
       borderRadius: '10px',
       padding: '0 8px',
+      background: 'steelblue',
+      '&:hover': {
+         background: 'tomato',
+      }
    }
 }))
 

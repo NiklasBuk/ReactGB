@@ -1,12 +1,11 @@
 import {makeStyles} from '@material-ui/core'
-import classNames from 'classnames'
 import PropTypes from 'prop-types'
 
 
 
 const useStyles = makeStyles(() => ({
    messagesWrapper: {
-      height: '800px',
+      height: '760px',
       width: '35vw',
       boxSizing: 'border-box',
       background: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0))',
@@ -61,7 +60,7 @@ const MessagesList = ({ messagesArray }) => {
                const isBotMessage = message.authorName === 'ChatBot'
                return (
                   <div 
-                     className = {classNames(classes.messagesList, isBotMessage ? classes.messageListBot : classes.messageListYou)}
+                     className = {`${classes.messagesList} ${isBotMessage ? classes.messageListBot : classes.messageListYou}`}
                      key = {i}
                   >
                         <div className = {isBotMessage ? classes.botName : classes.authorName}>{message.authorName}</div>
