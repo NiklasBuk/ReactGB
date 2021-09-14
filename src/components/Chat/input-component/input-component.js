@@ -1,5 +1,4 @@
-import {Button, TextField} from '@material-ui/core'
-import {makeStyles} from '@material-ui/core'
+import {Button, TextField, makeStyles} from '@material-ui/core'
 
 
 
@@ -16,6 +15,14 @@ const useStyles = makeStyles(() => ({
       margin: '0 10px 0 0',
       borderRadius: '10px',
       background: 'whitesmoke',
+      '&>div': {
+         '&::before': {
+            border: 'none !important',
+         },
+         '&::after': {
+            border: 'none !important',
+         }
+      }
    },
    button: {
       borderRadius: '10px',
